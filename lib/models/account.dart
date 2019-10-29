@@ -3,7 +3,6 @@
 
 import 'package:flutter/foundation.dart';
 
-import './address.dart';
 import './contact.dart';
 
 // Model for Account Class
@@ -14,7 +13,7 @@ class Account {
   final String website;
   final String industry;
   final String contactNumber;
-  final Address address;
+  final String address;
   List<Contact> contacts;
 
   Account({

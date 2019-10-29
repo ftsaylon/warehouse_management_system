@@ -30,7 +30,8 @@ class AccountDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container( // Account Details
+            Container(
+              // Account Details
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -39,8 +40,7 @@ class AccountDetailScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline,
                   ),
                   Text("${loadedAccount.category}"),
-                  Text(
-                      "${loadedAccount.address.street}, ${loadedAccount.address.city}, ${loadedAccount.address.province}, ${loadedAccount.address.country}, ${loadedAccount.address.postalCode}"),
+                  Text("${loadedAccount.address}"),
                   Text("${loadedAccount.industry}"),
                 ],
               ),
@@ -48,7 +48,7 @@ class AccountDetailScreen extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            Row( 
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Expanded(

@@ -5,8 +5,9 @@ import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../screens/account_detail_screen.dart';
 
+import '../screens/edit_account_screen.dart';
+import '../screens/account_detail_screen.dart';
 import '../providers/accounts.dart';
 
 class AccountsTable extends StatelessWidget {
@@ -75,12 +76,20 @@ class AccountsTable extends StatelessWidget {
                             IconButton(
                               icon: Icon(Icons.edit),
                               color: Theme.of(context).primaryColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                  EditAccountScreen.routeName,
+                                  arguments: account.id,
+                                );
+                              },
                             ),
                             IconButton(
                               icon: Icon(Icons.delete),
                               color: Theme.of(context).errorColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                Provider.of<Accounts>(context, listen: false)
+                                    .deleteAccount(account.id);
+                              },
                             ),
                           ],
                         ),

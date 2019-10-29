@@ -2,6 +2,7 @@
 // Project Name: Solar Warehouse Management System
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:warehouse_management_system/screens/project_detail_screen.dart';
 
@@ -15,7 +16,8 @@ class ProjectsTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final projectsData = accountId != null // Checks if instantiated through other pages or through app drawer
+    final projectsData = accountId !=
+            null // Checks if instantiated through other pages or through app drawer
         ? Provider.of<Projects>(context).getProjectsByClient(accountId)
         : Provider.of<Projects>(context).items;
     return Column(
@@ -78,7 +80,11 @@ class ProjectsTable extends StatelessWidget {
                       onTap: () {},
                     ),
                     DataCell(
-                      Text(project.closeDate.toString()),
+                      Text(
+                        DateFormat(
+                          'dd/MM/yyyy',
+                        ).format(project.closeDate),
+                      ),
                       onTap: () {},
                     ),
                     DataCell(

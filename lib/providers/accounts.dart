@@ -1,9 +1,8 @@
-// Author: Saylon, Francis T. 
+// Author: Saylon, Francis T.
 // Project Name: Solar Warehouse Management System
 
 import 'package:flutter/material.dart';
 
-import '../models/address.dart';
 import '../models/account.dart';
 import '../models/contact.dart';
 
@@ -16,12 +15,7 @@ class Accounts with ChangeNotifier {
       name: "Solar Innovation Ads Corporation",
       contactNumber: "09390959794",
       category: "Client",
-      address: Address(
-          street: "Panapaan IV",
-          city: "Bacoor",
-          province: "Cavite",
-          country: "Philippines",
-          postalCode: 4102),
+      address: "Panapaan IV, Bacoor, Cavite, Philippines, 4102",
       industry: "Advertising",
       website: "https://solarads.com.ph",
       contacts: [
@@ -42,12 +36,7 @@ class Accounts with ChangeNotifier {
       name: "Spindiv Kinetics",
       contactNumber: "09390959794",
       category: "Supplier",
-      address: Address(
-          street: "Guevarra St.",
-          city: "Dasmariñas City",
-          province: "Cavite",
-          country: "Philippines",
-          postalCode: 4114),
+      address: "Panapaan IV, Bacoor, Cavite, Philippines, 4102",
       industry: "Tech",
       website: "https://spindiv.com.ph",
       contacts: [
@@ -59,10 +48,43 @@ class Accounts with ChangeNotifier {
       ],
     ),
   ];
-  
+
   // Getter for _items
-  List<Account> get items { 
+  List<Account> get items {
     return [..._items];
+  }
+
+  // Function for adding a new account
+  Future<void> addAccount(Account account) async {
+    final newAccount = Account(
+      id: account.id,
+      name: account.name,
+      contactNumber: account.contactNumber,
+      category: account.category,
+      address: account.address,
+      industry: account.industry,
+      website: account.website,
+      contacts: account.contacts,
+    );
+
+    _items.add(newAccount);
+    notifyListeners();
+  }
+
+  Future<void> updateAccount(String id, Account newAccount) async {
+    final prodIndex = _items.indexWhere((account) => account.id == id);
+    if (prodIndex >= 0) {
+      _items[prodIndex] = newAccount;
+      notifyListeners();
+    }
+  }
+
+  // Function for deleting an account
+  void deleteAccount(String id) {
+    final existingAccountIndex =
+        _items.indexWhere((account) => account.id == id);
+    _items.removeAt(existingAccountIndex);
+    notifyListeners();
   }
 
   // Get contacts by account ID
@@ -74,5 +96,4 @@ class Accounts with ChangeNotifier {
   Account findById(String id) {
     return _items.firstWhere((account) => account.id == id);
   }
-
 }

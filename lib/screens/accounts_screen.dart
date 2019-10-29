@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/app_drawer.dart';
 import '../widgets/accounts_table.dart';
+import './edit_account_screen.dart';
 
 // List of Accounts Screen
 class AccountsScreen extends StatelessWidget {
@@ -32,7 +33,9 @@ class AccountsScreen extends StatelessWidget {
                 RaisedButton(
                   child: Text("Add New Account"),
                   elevation: 0,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(EditAccountScreen.routeName);
+                  },
                 ),
               ],
             ),
