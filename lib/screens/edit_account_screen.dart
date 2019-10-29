@@ -114,174 +114,222 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(10),
-        child: Form(
-          key: _form,
-          child: ListView(
-            children: <Widget>[
-              TextFormField(
-                initialValue: _initValues['name'],
-                decoration: InputDecoration(labelText: "Name"),
-                textInputAction: TextInputAction.next,
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_categoryFocusNode);
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "Please provide a value.";
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _editedAccount = Account(
-                    id: _editedAccount.id,
-                    name: value,
-                    category: _editedAccount.category,
-                    website: _editedAccount.website,
-                    industry: _editedAccount.industry,
-                    contactNumber: _editedAccount.contactNumber,
-                    address: _editedAccount.address,
-                    contacts: _editedAccount.contacts,
-                  );
-                },
+      appBar: AppBar(
+        elevation: 0,
+      ),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        margin: EdgeInsets.all(20),
+        child: _isLoading
+            ? CircularProgressIndicator()
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  _editedAccount.id != null
+                      ? Text(
+                          "Edit Account",
+                          style: Theme.of(context).textTheme.headline,
+                        )
+                      : Text(
+                          "Add Account",
+                          style: Theme.of(context).textTheme.headline,
+                        ),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    height: 600,
+                    width: double.infinity,
+                    child: Form(
+                      key: _form,
+                      child: ListView(
+                        children: <Widget>[
+                          TextFormField(
+                            initialValue: _initValues['name'],
+                            decoration: InputDecoration(labelText: "Name"),
+                            textInputAction: TextInputAction.next,
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_categoryFocusNode);
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please provide a value.";
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _editedAccount = Account(
+                                id: _editedAccount.id,
+                                name: value,
+                                category: _editedAccount.category,
+                                website: _editedAccount.website,
+                                industry: _editedAccount.industry,
+                                contactNumber: _editedAccount.contactNumber,
+                                address: _editedAccount.address,
+                                contacts: _editedAccount.contacts,
+                              );
+                            },
+                          ),
+                          TextFormField(
+                            initialValue: _initValues['category'],
+                            decoration: InputDecoration(labelText: "Category"),
+                            textInputAction: TextInputAction.next,
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_websiteFocusNode);
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please provide a value.";
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _editedAccount = Account(
+                                id: _editedAccount.id,
+                                name: _editedAccount.name,
+                                category: value,
+                                website: _editedAccount.website,
+                                industry: _editedAccount.industry,
+                                contactNumber: _editedAccount.contactNumber,
+                                address: _editedAccount.address,
+                                contacts: _editedAccount.contacts,
+                              );
+                            },
+                          ),
+                          TextFormField(
+                            initialValue: _initValues['website'],
+                            decoration: InputDecoration(labelText: "Website"),
+                            textInputAction: TextInputAction.next,
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_industryFocusNode);
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please provide a value.";
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _editedAccount = Account(
+                                id: _editedAccount.id,
+                                name: _editedAccount.name,
+                                category: _editedAccount.category,
+                                website: value,
+                                industry: _editedAccount.industry,
+                                contactNumber: _editedAccount.contactNumber,
+                                address: _editedAccount.address,
+                                contacts: _editedAccount.contacts,
+                              );
+                            },
+                          ),
+                          TextFormField(
+                            initialValue: _initValues['industry'],
+                            decoration: InputDecoration(labelText: "Industry"),
+                            textInputAction: TextInputAction.next,
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_contactNumberFocusNode);
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please provide a value.";
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _editedAccount = Account(
+                                id: _editedAccount.id,
+                                name: _editedAccount.name,
+                                category: _editedAccount.category,
+                                website: _editedAccount.website,
+                                industry: value,
+                                contactNumber: _editedAccount.contactNumber,
+                                address: _editedAccount.address,
+                                contacts: _editedAccount.contacts,
+                              );
+                            },
+                          ),
+                          TextFormField(
+                            initialValue: _initValues['contactNumber'],
+                            decoration:
+                                InputDecoration(labelText: "Contact Number"),
+                            textInputAction: TextInputAction.next,
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_addressFocusNode);
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please provide a value.";
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _editedAccount = Account(
+                                id: _editedAccount.id,
+                                name: _editedAccount.name,
+                                category: _editedAccount.category,
+                                website: _editedAccount.website,
+                                industry: _editedAccount.industry,
+                                contactNumber: value,
+                                address: _editedAccount.address,
+                                contacts: _editedAccount.contacts,
+                              );
+                            },
+                          ),
+                          TextFormField(
+                            initialValue: _initValues['address'],
+                            decoration: InputDecoration(labelText: "Address"),
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please provide a value.";
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _editedAccount = Account(
+                                id: _editedAccount.id,
+                                name: _editedAccount.name,
+                                category: _editedAccount.category,
+                                website: _editedAccount.website,
+                                industry: _editedAccount.industry,
+                                contactNumber: _editedAccount.contactNumber,
+                                address: value,
+                                contacts: _editedAccount.contacts,
+                              );
+                            },
+                          ),
+                          Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                RaisedButton(
+                                  child: Text("Submit"),
+                                  textColor: Colors.white,
+                                  color: Theme.of(context).accentColor,
+                                  onPressed: () {
+                                    _saveForm();
+                                  },
+                                ),
+                                RaisedButton(
+                                  child: Text("Cancel"),
+                                  textColor: Colors.white,
+                                  color: Theme.of(context).errorColor,
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              TextFormField(
-                initialValue: _initValues['category'],
-                decoration: InputDecoration(labelText: "Category"),
-                textInputAction: TextInputAction.next,
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_websiteFocusNode);
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "Please provide a value.";
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _editedAccount = Account(
-                    id: _editedAccount.id,
-                    name: _editedAccount.name,
-                    category: value,
-                    website: _editedAccount.website,
-                    industry: _editedAccount.industry,
-                    contactNumber: _editedAccount.contactNumber,
-                    address: _editedAccount.address,
-                    contacts: _editedAccount.contacts,
-                  );
-                },
-              ),
-              TextFormField(
-                initialValue: _initValues['website'],
-                decoration: InputDecoration(labelText: "Website"),
-                textInputAction: TextInputAction.next,
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_industryFocusNode);
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "Please provide a value.";
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _editedAccount = Account(
-                    id: _editedAccount.id,
-                    name: _editedAccount.name,
-                    category: _editedAccount.category,
-                    website: value,
-                    industry: _editedAccount.industry,
-                    contactNumber: _editedAccount.contactNumber,
-                    address: _editedAccount.address,
-                    contacts: _editedAccount.contacts,
-                  );
-                },
-              ),
-              TextFormField(
-                initialValue: _initValues['industry'],
-                decoration: InputDecoration(labelText: "Industry"),
-                textInputAction: TextInputAction.next,
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_contactNumberFocusNode);
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "Please provide a value.";
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _editedAccount = Account(
-                    id: _editedAccount.id,
-                    name: _editedAccount.name,
-                    category: _editedAccount.category,
-                    website: _editedAccount.website,
-                    industry: value,
-                    contactNumber: _editedAccount.contactNumber,
-                    address: _editedAccount.address,
-                    contacts: _editedAccount.contacts,
-                  );
-                },
-              ),
-              TextFormField(
-                initialValue: _initValues['contactNumber'],
-                decoration: InputDecoration(labelText: "Contact Number"),
-                textInputAction: TextInputAction.next,
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_addressFocusNode);
-                },
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "Please provide a value.";
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _editedAccount = Account(
-                    id: _editedAccount.id,
-                    name: _editedAccount.name,
-                    category: _editedAccount.category,
-                    website: _editedAccount.website,
-                    industry: _editedAccount.industry,
-                    contactNumber: value,
-                    address: _editedAccount.address,
-                    contacts: _editedAccount.contacts,
-                  );
-                },
-              ),
-              TextFormField(
-                initialValue: _initValues['address'],
-                decoration: InputDecoration(labelText: "Address"),
-                textInputAction: TextInputAction.next,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "Please provide a value.";
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _editedAccount = Account(
-                    id: _editedAccount.id,
-                    name: _editedAccount.name,
-                    category: _editedAccount.category,
-                    website: _editedAccount.website,
-                    industry: _editedAccount.industry,
-                    contactNumber: _editedAccount.contactNumber,
-                    address: value,
-                    contacts: _editedAccount.contacts,
-                  );
-                },
-              ),
-              RaisedButton(
-                child: Text("Submit"),
-                onPressed: () {
-                  _saveForm();
-                },
-              )
-            ],
-          ),
-        ),
       ),
     );
   }

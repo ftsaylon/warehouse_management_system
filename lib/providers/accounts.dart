@@ -57,7 +57,7 @@ class Accounts with ChangeNotifier {
   // Function for adding a new account
   Future<void> addAccount(Account account) async {
     final newAccount = Account(
-      id: account.id,
+      id: DateTime.now().toString(),
       name: account.name,
       contactNumber: account.contactNumber,
       category: account.category,
