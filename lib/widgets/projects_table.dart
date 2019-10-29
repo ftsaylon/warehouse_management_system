@@ -95,7 +95,7 @@ class ProjectsTable extends StatelessWidget {
                     DataCell(
                       Text(
                         DateFormat(
-                          'dd/MM/yyyy',
+                          'MM-dd-yyyy',
                         ).format(project.closeDate),
                       ),
                       onTap: () {},

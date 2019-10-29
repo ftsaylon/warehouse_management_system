@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:warehouse_management_system/models/account.dart';
+import 'package:intl/intl.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 import '../models/project.dart';
 import '../providers/projects.dart';
@@ -17,6 +18,7 @@ class EditProjectModal extends StatefulWidget {
 
 class _EditProjectModalState extends State<EditProjectModal> {
   final _form = GlobalKey<FormState>();
+
   var _editedProject = Project(
     id: null,
     name: '',
@@ -28,6 +30,7 @@ class _EditProjectModalState extends State<EditProjectModal> {
     closeDate: DateTime.now(),
     status: '',
   );
+
   var _initValues = {
     'name': '',
     'clientName': '',
@@ -39,8 +42,11 @@ class _EditProjectModalState extends State<EditProjectModal> {
     'closeDate': '',
     'status': '',
   };
+
   var _isInit = true;
   var _isLoading = false;
+
+  DateTime _selectedDate;
 
   @override
   void didChangeDependencies() {
@@ -101,6 +107,22 @@ class _EditProjectModalState extends State<EditProjectModal> {
       _isLoading = false;
     });
     Navigator.of(context).pop();
+  }
+
+  void _presentDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
   }
 
   @override
@@ -164,7 +186,6 @@ class _EditProjectModalState extends State<EditProjectModal> {
                               );
                             },
                           ),
-                          
                           DropdownButtonFormField(
                             items: accountChoices,
                             decoration: InputDecoration(labelText: "Account"),
@@ -193,9 +214,81 @@ class _EditProjectModalState extends State<EditProjectModal> {
                             },
                           ),
                           TextFormField(
-                            initialValue: _initValues['clientName'],
+                            initialValue: _initValues['amount'].toString(),
+                            decoration: InputDecoration(labelText: "Amount"),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please provide a value.";
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _editedProject = Project(
+                                id: _editedProject.id,
+                                name: _editedProject.name,
+                                accountId: _editedProject.accountId,
+                                materials: _editedProject.materials,
+                                quotations: _editedProject.quotations,
+                                amount: double.parse(value),
+                                expectedRevenue: _editedProject.expectedRevenue,
+                                closeDate: _editedProject.closeDate,
+                                status: _editedProject.status,
+                              );
+                            },
+                          ),
+                          TextFormField(
+                            initialValue:
+                                _initValues['expectedRevenue'].toString(),
                             decoration:
-                                InputDecoration(labelText: "Client Name"),
+                                InputDecoration(labelText: "Expected Revenue"),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please provide a value.";
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _editedProject = Project(
+                                id: _editedProject.id,
+                                name: _editedProject.name,
+                                accountId: _editedProject.accountId,
+                                materials: _editedProject.materials,
+                                quotations: _editedProject.quotations,
+                                amount: _editedProject.amount,
+                                expectedRevenue: double.parse(value),
+                                closeDate: _editedProject.closeDate,
+                                status: _editedProject.status,
+                              );
+                            },
+                          ),
+                          DateTimeField(
+                            initialValue: _editedProject.closeDate,
+                            format: DateFormat("MM-dd-yyyy"),
+                            onShowPicker: (context, currentValue) {
+                              return showDatePicker(
+                                  context: context,
+                                  firstDate: DateTime(1900),
+                                  initialDate: currentValue ?? DateTime.now(),
+                                  lastDate: DateTime(2100));
+                            },
+                            onSaved: (value) {
+                              _editedProject = Project(
+                                id: _editedProject.id,
+                                name: _editedProject.name,
+                                accountId: _editedProject.accountId,
+                                materials: _editedProject.materials,
+                                quotations: _editedProject.quotations,
+                                amount: _editedProject.amount,
+                                expectedRevenue: _editedProject.expectedRevenue,
+                                closeDate: value,
+                                status: _editedProject.status,
+                              );
+                            },
+                          ),
+                          TextFormField(
+                            initialValue: _initValues['status'],
+                            decoration:
+                                InputDecoration(labelText: "Status"),
                             validator: (value) {
                               if (value.isEmpty) {
                                 return "Please provide a value.";
@@ -212,10 +305,36 @@ class _EditProjectModalState extends State<EditProjectModal> {
                                 amount: _editedProject.amount,
                                 expectedRevenue: _editedProject.expectedRevenue,
                                 closeDate: _editedProject.closeDate,
-                                status: _editedProject.status,
+                                status: value,
                               );
                             },
                           ),
+                          Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                RaisedButton(
+                                  child: Text("Submit"),
+                                  textColor: Colors.white,
+                                  color: Theme.of(context).accentColor,
+                                  onPressed: () {
+                                    _saveForm();
+                                  },
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                RaisedButton(
+                                  child: Text("Cancel"),
+                                  textColor: Colors.white,
+                                  color: Theme.of(context).errorColor,
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),
