@@ -4,13 +4,16 @@ import 'package:provider/provider.dart';
 import '../models/account.dart';
 import '../providers/accounts.dart';
 
-class EditAccountScreen extends StatefulWidget {
-  static const routeName = "/edit-account";
+class EditAccountModal extends StatefulWidget {
+  final String accountId;
+
+  EditAccountModal({this.accountId});
+
   @override
-  _EditAccountScreenState createState() => _EditAccountScreenState();
+  _EditAccountModalState createState() => _EditAccountModalState();
 }
 
-class _EditAccountScreenState extends State<EditAccountScreen> {
+class _EditAccountModalState extends State<EditAccountModal> {
   final _categoryFocusNode = FocusNode();
   final _websiteFocusNode = FocusNode();
   final _industryFocusNode = FocusNode();
@@ -43,10 +46,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      final accountId = ModalRoute.of(context).settings.arguments as String;
-      if (accountId != null) {
-        _editedAccount =
-            Provider.of<Accounts>(context, listen: false).findById(accountId);
+      if (widget.accountId != null) {
+        _editedAccount = Provider.of<Accounts>(context, listen: false)
+            .findById(widget.accountId);
         _initValues = {
           'name': _editedAccount.name,
           'category': _editedAccount.category,
@@ -113,11 +115,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-      ),
-      body: Container(
+    return Dialog(
+      child: Container(
+        height: 670,
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.all(20),
         child: _isLoading
@@ -137,7 +137,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 20),
                     height: 600,
-                    width: double.infinity,
+                    width: 600,
                     child: Form(
                       key: _form,
                       child: ListView(
@@ -303,7 +303,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           ),
                           Container(
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 RaisedButton(
                                   child: Text("Submit"),
@@ -312,6 +312,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                   onPressed: () {
                                     _saveForm();
                                   },
+                                ),
+                                SizedBox(
+                                  width: 10,
                                 ),
                                 RaisedButton(
                                   child: Text("Cancel"),

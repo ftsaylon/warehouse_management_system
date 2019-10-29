@@ -9,7 +9,6 @@ import './providers/projects.dart';
 // Screens
 import './screens/accounts_screen.dart';
 import './screens/account_detail_screen.dart';
-import './screens/edit_account_screen.dart';
 import './screens/projects_screen.dart';
 import './screens/project_detail_screen.dart';
 
@@ -40,13 +39,12 @@ class MyApp extends StatelessWidget {
             headline: TextStyle(fontSize: 25),
           ),
         ),
-        home: MyHomePage(title: 'Solar Warehouse Management System'),
+        home: AccountsScreen(),
         routes: {
           AccountsScreen.routeName: (context) => AccountsScreen(),
           AccountDetailScreen.routeName: (context) => AccountDetailScreen(),
           ProjectsScreen.routeName: (context) => ProjectsScreen(),
           ProjectDetailScreen.routeName: (context) => ProjectDetailScreen(),
-          EditAccountScreen.routeName: (context) => EditAccountScreen(),
         },
       ),
     );
