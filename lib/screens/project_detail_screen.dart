@@ -35,7 +35,7 @@ class ProjectDetailScreen extends StatelessWidget {
                     loadedProject.name,
                     style: Theme.of(context).textTheme.headline,
                   ),
-                  Text(loadedProject.clientName),
+                  // Text(loadedProject.clientName),
                   Text(loadedProject.amount.toString()),
                   Text(loadedProject.expectedRevenue.toString()),
                   Text(loadedProject.closeDate.toString()),

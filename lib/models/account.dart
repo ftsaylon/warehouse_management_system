@@ -26,4 +26,8 @@ class Account {
     @required this.address,
     this.contacts,
   });
+
+  String get accountName {
+    return name;
+  }
 }

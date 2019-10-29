@@ -84,7 +84,7 @@ class _EditAccountModalState extends State<EditAccountModal> {
     });
     if (_editedAccount.id != null) {
       await Provider.of<Accounts>(context, listen: false)
-          .updateAccount(_editedAccount.id, _editedAccount);
+          .updateAccount(_editedAccount);
     } else {
       try {
         await Provider.of<Accounts>(context, listen: false)
@@ -282,6 +282,9 @@ class _EditAccountModalState extends State<EditAccountModal> {
                             initialValue: _initValues['address'],
                             decoration: InputDecoration(labelText: "Address"),
                             textInputAction: TextInputAction.next,
+                            onFieldSubmitted: (_) {
+                              _saveForm();
+                            },
                             validator: (value) {
                               if (value.isEmpty) {
                                 return "Please provide a value.";

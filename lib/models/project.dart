@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 class Project {
   final String id;
   final String name;
-  final String clientName;
   final String accountId;
   List<String> materials;
   List<String> quotations;
@@ -19,7 +18,6 @@ class Project {
   Project({
     @required this.id,
     @required this.name,
-    @required this.clientName,
     @required this.accountId,
     @required this.materials,
     @required this.quotations,

@@ -71,10 +71,11 @@ class Accounts with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateAccount(String id, Account newAccount) async {
-    final prodIndex = _items.indexWhere((account) => account.id == id);
-    if (prodIndex >= 0) {
-      _items[prodIndex] = newAccount;
+  Future<void> updateAccount(Account newAccount) async {
+    final String id = newAccount.id;
+    final accountIndex = _items.indexWhere((account) => account.id == id);
+    if (accountIndex >= 0) {
+      _items[accountIndex] = newAccount;
       notifyListeners();
     }
   }
@@ -96,4 +97,8 @@ class Accounts with ChangeNotifier {
   Account findById(String id) {
     return _items.firstWhere((account) => account.id == id);
   }
+
+  // String getAccountName(String id) {
+  //   return findById(id).name;
+  // }
 }

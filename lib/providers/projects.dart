@@ -1,4 +1,4 @@
-// Author: Saylon, Francis T. 
+// Author: Saylon, Francis T.
 // Project Name: Solar Warehouse Management System
 
 import 'package:flutter/material.dart';
@@ -8,44 +8,74 @@ import '../models/project.dart';
 class Projects with ChangeNotifier {
   List<Project> _items = [
     Project(
-      id: 1.toString(),
-      name: "Project Pegasus",
-      clientName: "Solar Innovation Ads Corporation",
-      accountId: 1.toString(), 
-      materials: [
-        "Tesseract",
-        "Scepter",
-        "Nick Fury",
-        "Barton",
-      ],
-      quotations: [],
-      amount: 100000,
-      expectedRevenue: 100000,
-      closeDate: DateTime.now().add(Duration(days: 10)),
-      status: "Quotation"
-    ),
+        id: 1.toString(),
+        name: "Project Pegasus",
+        accountId: 1.toString(),
+        materials: [
+          "Tesseract",
+          "Scepter",
+          "Nick Fury",
+          "Barton",
+        ],
+        quotations: [],
+        amount: 100000,
+        expectedRevenue: 100000,
+        closeDate: DateTime.now().add(Duration(days: 10)),
+        status: "Quotation"),
     Project(
-      id: 2.toString(),
-      name: "Project Goliath",
-      clientName: "Spindiv Kinetics",
-      accountId: 2.toString(), 
-      materials: [
-        "Pym Particles",
-        "Regulator",
-        "Hank Pym",
-        "Scott Lang",
-      ],
-      quotations: [],
-      amount: 100000,
-      expectedRevenue: 100000,
-      closeDate: DateTime.now().add(Duration(days: 10)),
-      status: "Quotation"
-    ),
+        id: 2.toString(),
+        name: "Project Goliath",
+        accountId: 2.toString(),
+        materials: [
+          "Pym Particles",
+          "Regulator",
+          "Hank Pym",
+          "Scott Lang",
+        ],
+        quotations: [],
+        amount: 100000,
+        expectedRevenue: 100000,
+        closeDate: DateTime.now().add(Duration(days: 10)),
+        status: "Quotation"),
   ];
 
   // Getter for _items
   List<Project> get items {
     return [..._items];
+  }
+
+  Future<void> addProject(Project project) async {
+    final newProject = Project(
+      id: DateTime.now().toString(),
+      name: project.name,
+      accountId: project.accountId,
+      materials: project.materials,
+      quotations: project.quotations,
+      amount: project.amount,
+      expectedRevenue: project.expectedRevenue,
+      closeDate: project.closeDate,
+      status: project.status,
+    );
+
+    _items.add(newProject);
+    notifyListeners();
+  }
+
+  Future<void> updateProject(Project newProject) async {
+    final String id = newProject.id;
+    final projectIndex = _items.indexWhere((project) => project.id == id);
+    if (projectIndex >= 0) {
+      _items[projectIndex] = newProject;
+      notifyListeners();
+    }
+  }
+
+  // Function for deleting an account
+  void deleteProject(String id) {
+    final existingProjectIndex =
+        _items.indexWhere((project) => project.id == id);
+    _items.removeAt(existingProjectIndex);
+    notifyListeners();
   }
 
   // Get projects by client using account ID

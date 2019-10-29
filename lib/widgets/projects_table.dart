@@ -4,8 +4,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:warehouse_management_system/screens/project_detail_screen.dart';
+import 'package:warehouse_management_system/providers/accounts.dart';
 
+import '../modals/edit_project_modal.dart';
+import '../screens/project_detail_screen.dart';
 import '../screens/account_detail_screen.dart';
 import '../providers/projects.dart';
 
@@ -13,6 +15,13 @@ class ProjectsTable extends StatelessWidget {
   final String accountId;
 
   ProjectsTable({this.accountId});
+
+  _showAddEditModal(BuildContext context, String id) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => EditProjectModal(projectId: id),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +70,11 @@ class ProjectsTable extends StatelessWidget {
                       },
                     ),
                     DataCell(
-                      Text(project.clientName),
+                      Text(
+                        Provider.of<Accounts>(context)
+                            .findById(project.accountId)
+                            .accountName,
+                      ),
                       onTap: accountId == null
                           ? () {
                               Navigator.of(context).pushNamed(
@@ -99,12 +112,17 @@ class ProjectsTable extends StatelessWidget {
                             IconButton(
                               icon: Icon(Icons.edit),
                               color: Theme.of(context).primaryColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                _showAddEditModal(context, project.id);
+                              },
                             ),
                             IconButton(
                               icon: Icon(Icons.delete),
                               color: Theme.of(context).errorColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                Provider.of<Projects>(context)
+                                    .deleteProject(project.id);
+                              },
                             ),
                           ],
                         ),
