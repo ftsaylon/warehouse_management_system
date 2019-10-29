@@ -1,4 +1,4 @@
-# warehouse_management_system
+# Warehouse Management System
 
 A new Flutter project.
 
