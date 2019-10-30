@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:warehouse_management_system/providers/materials.dart';
 
 import '../providers/projects.dart';
 
@@ -12,10 +13,10 @@ class MaterialsTable extends StatelessWidget {
   MaterialsTable({this.projectId});
 
   Widget build(BuildContext context) {
-    final projectsData = projectId !=
-            null // Checks if instantiated through other pages or through app drawer
-        ? Provider.of<Projects>(context).getProjectsByClient(projectId)
-        : Provider.of<Projects>(context).items;
+    final materialsData = Provider.of<Projects>(context)
+        .findById(projectId)
+        .getMaterialsByProject();
+    print(materialsData);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -28,51 +29,61 @@ class MaterialsTable extends StatelessWidget {
               label: Text("Amount"),
             ),
             DataColumn(
+              label: Text("Quantity"),
+            ),
+            DataColumn(
               label: Text("Actions"),
             )
           ],
-          rows: projectsData
+          rows: materialsData.entries
               .map(
-                (project) => DataRow(
-                  cells: [
-                    DataCell(
-                      Text(project.name),
-                      onTap: () {},
-                    ),
-                    DataCell(
-                      Text(project.amount.toString()),
-                      onTap: () {},
-                    ),
-                    DataCell(
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            IconButton(
-                              icon: Icon(Icons.edit),
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () {
-                                // _showAddEditModal(context, project.id);
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(Icons.delete),
-                              color: Theme.of(context).errorColor,
-                              onPressed: () {
-                                Provider.of<Projects>(context)
-                                    .deleteProject(project.id);
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                (material) => DataRow(
+                  cells: _dataCellBuilder(context, material.key, material.value),
                 ),
               )
               .toList(),
         ),
       ],
     );
+  }
+  
+  List<DataCell> _dataCellBuilder(
+      BuildContext context, String materialId, int quantity) {
+    final materialData = Provider.of<Materials>(context).findById(materialId);
+    return [
+      DataCell(
+        Text(materialData.name),
+        onTap: () {},
+      ),
+      DataCell(
+        Text(materialData.amount.toString()),
+        onTap: () {},
+      ),
+      DataCell(
+        Text(quantity.toString()),
+        onTap: () {},
+      ),
+      DataCell(
+        Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.edit),
+                color: Theme.of(context).primaryColor,
+                onPressed: () {
+                  // _showAddEditModal(context, project.id);
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.delete),
+                color: Theme.of(context).errorColor,
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ),
+      ),
+    ];
   }
 }

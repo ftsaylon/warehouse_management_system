@@ -1,16 +1,14 @@
-// Author: Saylon, Francis T. 
+// Author: Saylon, Francis T.
 // Project Name: Solar Warehouse Management System
 
 import 'package:flutter/foundation.dart';
 
-import '../models/material_item.dart';
-
 // Model for Project Class
-class Project {
+class Project with ChangeNotifier{
   final String id;
   final String name;
   final String accountId;
-  List<String> materials;
+  Map<String, int> materials;
   List<String> quotations;
   final double amount;
   final double expectedRevenue;
@@ -28,4 +26,13 @@ class Project {
     @required this.closeDate,
     @required this.status,
   });
+
+  void addMaterialToProject(String materialId, int quantity) {
+    materials.putIfAbsent(materialId, () => quantity);
+  }
+
+  // Getting the materials with quantities
+  Map<String, int> getMaterialsByProject() {
+    return materials;
+  }
 }

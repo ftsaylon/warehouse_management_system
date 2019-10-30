@@ -9,6 +9,7 @@ import './helpers/custom_route.dart';
 import './providers/accounts.dart';
 import './providers/projects.dart';
 import './providers/contacts.dart';
+import './providers/materials.dart';
 
 // Screens
 import './screens/accounts_screen.dart';
@@ -35,6 +36,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: Contacts(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Materials(),
         )
       ],
       child: MaterialApp(

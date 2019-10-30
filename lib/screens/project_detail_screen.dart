@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/projects.dart';
 import '../widgets/card_table.dart';
+import '../widgets/materials_table.dart';
 
 // Project Details Screen
 class ProjectDetailScreen extends StatelessWidget {
@@ -50,7 +51,10 @@ class ProjectDetailScreen extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   flex: 1,
-                  child: CardTable(label: "Materials"),
+                  child: CardTable(
+                    label: "Materials",
+                    table: MaterialsTable(projectId: loadedProject.id),
+                  ),
                 ),
                 Expanded(
                   flex: 1,
