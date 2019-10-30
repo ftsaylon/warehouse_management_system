@@ -4,7 +4,7 @@
 import 'package:flutter/foundation.dart';
 
 // Model for Project Class
-class Project with ChangeNotifier{
+class Project with ChangeNotifier {
   final String id;
   final String name;
   final String accountId;
@@ -27,8 +27,12 @@ class Project with ChangeNotifier{
     @required this.status,
   });
 
-  void addMaterialToProject(String materialId, int quantity) {
+  Future<void> addMaterialToProject(String materialId, int quantity) async {
     materials.putIfAbsent(materialId, () => quantity);
+  }
+
+  Future<void> updateMaterialQuantity(String materialId, int newQuantity) async {
+    materials.update(materialId, (quantity) => newQuantity);
   }
 
   // Getting the materials with quantities

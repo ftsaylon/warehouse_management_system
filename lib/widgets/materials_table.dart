@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:warehouse_management_system/modals/edit_material_modal.dart';
 import 'package:warehouse_management_system/providers/materials.dart';
 
 import '../providers/projects.dart';
@@ -12,11 +13,20 @@ class MaterialsTable extends StatelessWidget {
 
   MaterialsTable({this.projectId});
 
+  _showAddEditModal(BuildContext context, String projectId, String materialId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => EditMaterialModal(
+        projectId: projectId,
+        materialId: materialId,
+      ),
+    );
+  }
+
   Widget build(BuildContext context) {
     final materialsData = Provider.of<Projects>(context)
         .findById(projectId)
         .getMaterialsByProject();
-    print(materialsData);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -32,13 +42,17 @@ class MaterialsTable extends StatelessWidget {
               label: Text("Quantity"),
             ),
             DataColumn(
+              label: Text("SubTotal"),
+            ),
+            DataColumn(
               label: Text("Actions"),
             )
           ],
           rows: materialsData.entries
               .map(
                 (material) => DataRow(
-                  cells: _dataCellBuilder(context, material.key, material.value),
+                  cells:
+                      _dataCellBuilder(context, material.key, material.value),
                 ),
               )
               .toList(),
@@ -46,7 +60,7 @@ class MaterialsTable extends StatelessWidget {
       ],
     );
   }
-  
+
   List<DataCell> _dataCellBuilder(
       BuildContext context, String materialId, int quantity) {
     final materialData = Provider.of<Materials>(context).findById(materialId);
@@ -64,6 +78,9 @@ class MaterialsTable extends StatelessWidget {
         onTap: () {},
       ),
       DataCell(
+        Text((materialData.amount * quantity).toString()),
+      ),
+      DataCell(
         Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -72,7 +89,7 @@ class MaterialsTable extends StatelessWidget {
                 icon: Icon(Icons.edit),
                 color: Theme.of(context).primaryColor,
                 onPressed: () {
-                  // _showAddEditModal(context, project.id);
+                  _showAddEditModal(context, projectId, materialData.id);
                 },
               ),
               IconButton(

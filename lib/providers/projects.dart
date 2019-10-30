@@ -70,8 +70,9 @@ class Projects with ChangeNotifier {
 
   // Function for deleting an account
   void deleteProject(String id) {
-    final existingProjectIndex =
-        _items.indexWhere((project) => project.id == id);
+    final existingProjectIndex = _items.indexWhere(
+      (project) => project.id == id,
+    );
     _items.removeAt(existingProjectIndex);
     notifyListeners();
   }
@@ -85,4 +86,5 @@ class Projects with ChangeNotifier {
   Project findById(String projectId) {
     return _items.firstWhere((project) => project.id == projectId);
   }
+
 }
