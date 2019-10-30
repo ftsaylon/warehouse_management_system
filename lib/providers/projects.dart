@@ -12,10 +12,10 @@ class Projects with ChangeNotifier {
         name: "Project Pegasus",
         accountId: 1.toString(),
         materials: [
-          "Tesseract",
-          "Scepter",
-          "Nick Fury",
-          "Barton",
+          1.toString(),
+          2.toString(),
+          3.toString(),
+          4.toString(),
         ],
         quotations: [],
         amount: 100000,
@@ -27,10 +27,10 @@ class Projects with ChangeNotifier {
         name: "Project Goliath",
         accountId: 2.toString(),
         materials: [
-          "Pym Particles",
-          "Regulator",
-          "Hank Pym",
-          "Scott Lang",
+          5.toString(),
+          6.toString(),
+          7.toString(),
+          8.toString(),
         ],
         quotations: [],
         amount: 100000,
@@ -80,7 +80,7 @@ class Projects with ChangeNotifier {
 
   // Get projects by client using account ID
   List<Project> getProjectsByClient(String accountId) {
-    return _items.where((project) => project.accountId == accountId).toList();
+    return [..._items.where((project) => project.accountId == accountId)];
   }
 
   // Get one project using project ID

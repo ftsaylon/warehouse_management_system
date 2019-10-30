@@ -22,7 +22,7 @@ class _EditProjectModalState extends State<EditProjectModal> {
   var _editedProject = Project(
     id: null,
     name: '',
-    accountId: '',
+    accountId: null,
     materials: [],
     quotations: [],
     amount: 0.0,
@@ -45,8 +45,6 @@ class _EditProjectModalState extends State<EditProjectModal> {
 
   var _isInit = true;
   var _isLoading = false;
-
-  DateTime _selectedDate;
 
   @override
   void didChangeDependencies() {
@@ -107,22 +105,6 @@ class _EditProjectModalState extends State<EditProjectModal> {
       _isLoading = false;
     });
     Navigator.of(context).pop();
-  }
-
-  void _presentDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2019),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      }
-      setState(() {
-        _selectedDate = pickedDate;
-      });
-    });
   }
 
   @override
@@ -186,10 +168,12 @@ class _EditProjectModalState extends State<EditProjectModal> {
                               );
                             },
                           ),
+                          // if (widget.projectId ==
+                          //     null) // Checks if editing the project. Account can't be changed.
                           DropdownButtonFormField(
                             items: accountChoices,
-                            decoration: InputDecoration(labelText: "Account"),
                             value: _editedProject.accountId,
+                            decoration: InputDecoration(labelText: "Account"),
                             validator: (value) {
                               if (value.isEmpty) {
                                 return "Please provide a value.";
@@ -287,8 +271,7 @@ class _EditProjectModalState extends State<EditProjectModal> {
                           ),
                           TextFormField(
                             initialValue: _initValues['status'],
-                            decoration:
-                                InputDecoration(labelText: "Status"),
+                            decoration: InputDecoration(labelText: "Status"),
                             validator: (value) {
                               if (value.isEmpty) {
                                 return "Please provide a value.";

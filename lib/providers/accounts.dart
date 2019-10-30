@@ -4,7 +4,6 @@
 import 'package:flutter/material.dart';
 
 import '../models/account.dart';
-import '../models/contact.dart';
 
 // Accounts Provider
 class Accounts with ChangeNotifier {
@@ -18,18 +17,6 @@ class Accounts with ChangeNotifier {
       address: "Panapaan IV, Bacoor, Cavite, Philippines, 4102",
       industry: "Advertising",
       website: "https://solarads.com.ph",
-      contacts: [
-        Contact(
-          id: DateTime.now().toString(),
-          name: "Francis Saylon",
-          contactNumber: "09390959794",
-        ),
-        Contact(
-          id: DateTime.now().toString(),
-          name: "Ramon Cantanjal",
-          contactNumber: "09390959794",
-        ),
-      ],
     ),
     Account(
       id: 2.toString(),
@@ -39,13 +26,6 @@ class Accounts with ChangeNotifier {
       address: "Panapaan IV, Bacoor, Cavite, Philippines, 4102",
       industry: "Tech",
       website: "https://spindiv.com.ph",
-      contacts: [
-        Contact(
-          id: DateTime.now().toString(),
-          name: "Ramon Cantanjal",
-          contactNumber: "09390959794",
-        ),
-      ],
     ),
   ];
 
@@ -64,7 +44,6 @@ class Accounts with ChangeNotifier {
       address: account.address,
       industry: account.industry,
       website: account.website,
-      contacts: account.contacts,
     );
 
     _items.add(newAccount);
@@ -88,17 +67,8 @@ class Accounts with ChangeNotifier {
     notifyListeners();
   }
 
-  // Get contacts by account ID
-  List<Contact> getContactsById(String id) {
-    return [...findById(id).contacts];
-  }
-
   // Get one account using account ID
   Account findById(String id) {
     return _items.firstWhere((account) => account.id == id);
   }
-
-  // String getAccountName(String id) {
-  //   return findById(id).name;
-  // }
 }

@@ -3,12 +3,20 @@
 
 import 'package:flutter/material.dart';
 
+import '../modals/edit_project_modal.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/projects_table.dart';
 
 // List of Projects Screen
 class ProjectsScreen extends StatelessWidget {
   static const String routeName = "/projects";
+
+  _showAddEditModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => EditProjectModal(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,9 @@ class ProjectsScreen extends StatelessWidget {
                 RaisedButton(
                   child: Text("Add New Project"),
                   elevation: 0,
-                  onPressed: () {},
+                  onPressed: () {
+                    _showAddEditModal(context);
+                  },
                 ),
               ],
             ),

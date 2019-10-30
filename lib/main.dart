@@ -2,9 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// Helpers
+import './helpers/custom_route.dart';
+
 // Providers
 import './providers/accounts.dart';
 import './providers/projects.dart';
+import './providers/contacts.dart';
 
 // Screens
 import './screens/accounts_screen.dart';
@@ -28,15 +32,24 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: Projects(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Contacts(),
         )
       ],
       child: MaterialApp(
         title: 'Solar WMS',
         theme: ThemeData(
           fontFamily: 'Roboto',
-          primaryColor: Colors.blue,
+          primarySwatch: Colors.blue,
           textTheme: TextTheme(
             headline: TextStyle(fontSize: 25),
+          ),
+          pageTransitionsTheme: PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: CustomPageTransitionBuilder(),
+              TargetPlatform.iOS: CustomPageTransitionBuilder(),
+            },
           ),
         ),
         home: AccountsScreen(),

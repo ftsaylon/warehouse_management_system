@@ -3,6 +3,8 @@
 
 import 'package:flutter/foundation.dart';
 
+import '../models/material_item.dart';
+
 // Model for Project Class
 class Project {
   final String id;

@@ -8,10 +8,12 @@ class Contact {
   final String id;
   final String name;
   final String contactNumber;
+  final String accountId;
 
   Contact({
     @required this.id,
     @required this.name,
     @required this.contactNumber,
+    @required this.accountId,
   });
 }

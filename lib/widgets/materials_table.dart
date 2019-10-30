@@ -4,41 +4,43 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/contacts.dart';
+import '../providers/projects.dart';
 
-class ContactsTable extends StatelessWidget {
-  final String accountId;
+class MaterialsTable extends StatelessWidget {
+  final String projectId;
 
-  ContactsTable({this.accountId});
+  MaterialsTable({this.projectId});
 
-  @override
   Widget build(BuildContext context) {
-    final contactsData = Provider.of<Contacts>(context).getContactsByAccountId(accountId);
+    final projectsData = projectId !=
+            null // Checks if instantiated through other pages or through app drawer
+        ? Provider.of<Projects>(context).getProjectsByClient(projectId)
+        : Provider.of<Projects>(context).items;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         DataTable(
           columns: [
             DataColumn(
-              label: Text("Contact Name"),
+              label: Text("Item Name"),
             ),
             DataColumn(
-              label: Text("Contact Number"),
+              label: Text("Amount"),
             ),
             DataColumn(
               label: Text("Actions"),
             )
           ],
-          rows: contactsData
+          rows: projectsData
               .map(
-                (contact) => DataRow(
+                (project) => DataRow(
                   cells: [
                     DataCell(
-                      Text(contact.name),
+                      Text(project.name),
                       onTap: () {},
                     ),
                     DataCell(
-                      Text(contact.contactNumber),
+                      Text(project.amount.toString()),
                       onTap: () {},
                     ),
                     DataCell(
@@ -49,12 +51,17 @@ class ContactsTable extends StatelessWidget {
                             IconButton(
                               icon: Icon(Icons.edit),
                               color: Theme.of(context).primaryColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                // _showAddEditModal(context, project.id);
+                              },
                             ),
                             IconButton(
                               icon: Icon(Icons.delete),
                               color: Theme.of(context).errorColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                Provider.of<Projects>(context)
+                                    .deleteProject(project.id);
+                              },
                             ),
                           ],
                         ),

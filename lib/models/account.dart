@@ -14,7 +14,7 @@ class Account {
   final String industry;
   final String contactNumber;
   final String address;
-  List<Contact> contacts;
+  List<String> projects;
 
   Account({
     @required this.id,
@@ -24,7 +24,7 @@ class Account {
     this.website,
     @required this.industry,
     @required this.address,
-    this.contacts,
+    this.projects,
   });
 
   String get accountName {

@@ -29,7 +29,6 @@ class _EditAccountModalState extends State<EditAccountModal> {
     industry: "",
     contactNumber: "",
     address: "",
-    contacts: [],
   );
   var _initValues = {
     'name': '',
@@ -56,7 +55,6 @@ class _EditAccountModalState extends State<EditAccountModal> {
           'industry': _editedAccount.industry,
           'contactNumber': _editedAccount.contactNumber,
           'address': _editedAccount.address,
-          'contacts': _editedAccount.contacts,
         };
       }
     }
@@ -165,7 +163,6 @@ class _EditAccountModalState extends State<EditAccountModal> {
                                 industry: _editedAccount.industry,
                                 contactNumber: _editedAccount.contactNumber,
                                 address: _editedAccount.address,
-                                contacts: _editedAccount.contacts,
                               );
                             },
                           ),
@@ -192,7 +189,6 @@ class _EditAccountModalState extends State<EditAccountModal> {
                                 industry: _editedAccount.industry,
                                 contactNumber: _editedAccount.contactNumber,
                                 address: _editedAccount.address,
-                                contacts: _editedAccount.contacts,
                               );
                             },
                           ),
@@ -219,7 +215,6 @@ class _EditAccountModalState extends State<EditAccountModal> {
                                 industry: _editedAccount.industry,
                                 contactNumber: _editedAccount.contactNumber,
                                 address: _editedAccount.address,
-                                contacts: _editedAccount.contacts,
                               );
                             },
                           ),
@@ -246,7 +241,6 @@ class _EditAccountModalState extends State<EditAccountModal> {
                                 industry: value,
                                 contactNumber: _editedAccount.contactNumber,
                                 address: _editedAccount.address,
-                                contacts: _editedAccount.contacts,
                               );
                             },
                           ),
@@ -274,7 +268,6 @@ class _EditAccountModalState extends State<EditAccountModal> {
                                 industry: _editedAccount.industry,
                                 contactNumber: value,
                                 address: _editedAccount.address,
-                                contacts: _editedAccount.contacts,
                               );
                             },
                           ),
@@ -300,7 +293,6 @@ class _EditAccountModalState extends State<EditAccountModal> {
                                 industry: _editedAccount.industry,
                                 contactNumber: _editedAccount.contactNumber,
                                 address: value,
-                                contacts: _editedAccount.contacts,
                               );
                             },
                           ),
