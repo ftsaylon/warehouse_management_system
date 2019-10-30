@@ -13,7 +13,8 @@ class MaterialsTable extends StatelessWidget {
 
   MaterialsTable({this.projectId});
 
-  _showAddEditModal(BuildContext context, String projectId, String materialId) {
+  _showAddEditModal(
+      {BuildContext context, String projectId, String materialId}) {
     showDialog(
       context: context,
       builder: (BuildContext context) => EditMaterialModal(
@@ -89,13 +90,25 @@ class MaterialsTable extends StatelessWidget {
                 icon: Icon(Icons.edit),
                 color: Theme.of(context).primaryColor,
                 onPressed: () {
-                  _showAddEditModal(context, projectId, materialData.id);
+                  _showAddEditModal(
+                    context: context,
+                    projectId: projectId,
+                    materialId: materialData.id,
+                  );
                 },
               ),
               IconButton(
                 icon: Icon(Icons.delete),
                 color: Theme.of(context).errorColor,
-                onPressed: () {},
+                onPressed: projectId == null
+                    ? () {
+                        Provider.of<Materials>(context)
+                            .deleteMaterial(materialData.id);
+                      }
+                    : () {
+                        Provider.of<Projects>(context)
+                            .deleteMaterialInProject(projectId, materialData.id);
+                      },
               ),
             ],
           ),

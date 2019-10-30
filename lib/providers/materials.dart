@@ -48,7 +48,7 @@ class Materials with ChangeNotifier {
   }
 
   // Function for deleting an account
-  void deleteProject(String id) {
+  void deleteMaterial(String id) {
     final existingMaterialIndex = _items.indexWhere(
       (material) => material.id == id,
     );

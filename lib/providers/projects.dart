@@ -87,4 +87,8 @@ class Projects with ChangeNotifier {
     return _items.firstWhere((project) => project.id == projectId);
   }
 
+  void deleteMaterialInProject(String projectId, String materialId) {
+    findById(projectId).materials.remove(materialId);
+    notifyListeners();
+  }
 }
