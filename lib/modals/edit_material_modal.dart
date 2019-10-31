@@ -1,14 +1,15 @@
+// Author: Saylon, Francis T.
+// Project Name: Solar Warehouse Management System
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
-
 import '../models/material_item.dart';
 import '../providers/materials.dart';
 import '../providers/projects.dart';
 
 class EditMaterialModal extends StatefulWidget {
-  final String materialId;
-  final String projectId;
+  final String materialId; // materialId is null if adding
+  final String projectId; // projectId is null if this modal is accessed thru Inventory Screen
 
   EditMaterialModal({
     this.materialId,
@@ -20,7 +21,9 @@ class EditMaterialModal extends StatefulWidget {
 }
 
 class _EditMaterialModalState extends State<EditMaterialModal> {
-  var quantity = 0;
+  // quantity is separated from _editedMaterial because 
+  // it is used for the projects provider and not the materials provider
+  var quantity = 0; 
   final _form = GlobalKey<FormState>();
   var _editedMaterial = MaterialItem(
     id: null,
@@ -70,8 +73,8 @@ class _EditMaterialModalState extends State<EditMaterialModal> {
       _isLoading = true;
     });
 
-    if (widget.projectId != null) {
-      if (_editedMaterial.id != null) {
+    if (widget.projectId != null) { // Checks if accessed thru project page
+      if (_editedMaterial.id != null) { // Checks if editing
         await Provider.of<Projects>(context, listen: false)
             .updateMaterialInProject(
           widget.projectId,
@@ -79,8 +82,8 @@ class _EditMaterialModalState extends State<EditMaterialModal> {
           quantity,
         );
       }
-    } else {
-      if (_editedMaterial.id != null) {
+    } else { // Runs if adding a new material in Inventory page
+      if (_editedMaterial.id != null) { // Checks if editing
         await Provider.of<Materials>(context, listen: false)
             .updateMaterial(_editedMaterial);
       } else {

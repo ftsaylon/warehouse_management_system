@@ -22,7 +22,6 @@ class AccountsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Text("Accounts"),
         elevation: 0,
       ),
       body: Container(

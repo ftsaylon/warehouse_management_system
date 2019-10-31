@@ -1,3 +1,6 @@
+// Author: Saylon, Francis T.
+// Project Name: Solar Warehouse Management System
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -5,7 +8,7 @@ import '../models/account.dart';
 import '../providers/accounts.dart';
 
 class EditAccountModal extends StatefulWidget {
-  final String accountId;
+  final String accountId; // Gets accountId if editing. accountId is null if adding.
 
   EditAccountModal({this.accountId});
 
@@ -80,12 +83,12 @@ class _EditAccountModalState extends State<EditAccountModal> {
     setState(() {
       _isLoading = true;
     });
-    if (_editedAccount.id != null) {
-      await Provider.of<Accounts>(context, listen: false)
+    if (_editedAccount.id != null) { // Checks if editing or adding
+      await Provider.of<Accounts>(context, listen: false) // Runs when editing the account
           .updateAccount(_editedAccount);
     } else {
       try {
-        await Provider.of<Accounts>(context, listen: false)
+        await Provider.of<Accounts>(context, listen: false) // Runs when adding a new account
             .addAccount(_editedAccount);
       } catch (e) {
         await showDialog(
