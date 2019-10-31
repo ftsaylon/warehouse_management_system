@@ -1,6 +1,7 @@
 // Flutter Packages
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:warehouse_management_system/screens/inventory_screen.dart';
 
 // Helpers
 import './helpers/custom_route.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
           AccountDetailScreen.routeName: (context) => AccountDetailScreen(),
           ProjectsScreen.routeName: (context) => ProjectsScreen(),
           ProjectDetailScreen.routeName: (context) => ProjectDetailScreen(),
+          InventoryScreen.routeName: (context) => InventoryScreen(),
         },
       ),
     );

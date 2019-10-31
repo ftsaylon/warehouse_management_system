@@ -91,4 +91,14 @@ class Projects with ChangeNotifier {
     findById(projectId).materials.remove(materialId);
     notifyListeners();
   }
+
+  void deleteMaterialInAllProjects(String materialId) {
+    _items.forEach((project) => project.materials.remove(materialId));
+    notifyListeners();
+  }
+
+  Future<void> updateMaterialInProject(String projectId, String materialId, int quantity) async {
+    findById(projectId).updateMaterialQuantity(materialId, quantity);
+    notifyListeners();
+  }
 }

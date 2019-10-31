@@ -2,6 +2,7 @@
 // Project Name: Solar Warehouse Management System
 
 import 'package:flutter/material.dart';
+import 'package:warehouse_management_system/screens/inventory_screen.dart';
 
 import '../screens/projects_screen.dart';
 import '../screens/accounts_screen.dart';
@@ -41,6 +42,14 @@ class AppDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Inventory'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(InventoryScreen.routeName);
+            },
+          ),
+          Divider(),
+          ListTile(
             leading: Icon(Icons.folder_open),
             title: Text('Quotations'),
             onTap: () {
@@ -65,7 +74,7 @@ class AppDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.motorcycle),
+            leading: Icon(Icons.local_shipping),
             title: Text('Delivery'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');

@@ -25,9 +25,6 @@ class MaterialsTable extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
-    final materialsData = Provider.of<Projects>(context)
-        .findById(projectId)
-        .getMaterialsByProject();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -40,23 +37,43 @@ class MaterialsTable extends StatelessWidget {
               label: Text("Amount"),
             ),
             DataColumn(
-              label: Text("Quantity"),
+              label: projectId != null ? Text("Quantity") : Text("Stocks"),
             ),
-            DataColumn(
-              label: Text("SubTotal"),
-            ),
+            if (projectId != null)
+              DataColumn(
+                label: Text("SubTotal"),
+              ),
             DataColumn(
               label: Text("Actions"),
             )
           ],
-          rows: materialsData.entries
-              .map(
-                (material) => DataRow(
-                  cells:
-                      _dataCellBuilder(context, material.key, material.value),
-                ),
-              )
-              .toList(),
+          rows: projectId != null
+              ? Provider.of<Projects>(context)
+                  .findById(projectId)
+                  .getMaterialsByProject()
+                  .entries
+                  .map(
+                    (material) => DataRow(
+                      cells: _dataCellBuilder(
+                        context,
+                        material.key,
+                        material.value,
+                      ),
+                    ),
+                  )
+                  .toList()
+              : Provider.of<Materials>(context)
+                  .items
+                  .map(
+                    (material) => DataRow(
+                      cells: _dataCellBuilder(
+                        context,
+                        material.id,
+                        material.stock,
+                      ),
+                    ),
+                  )
+                  .toList(),
         ),
       ],
     );
@@ -78,9 +95,10 @@ class MaterialsTable extends StatelessWidget {
         Text(quantity.toString()),
         onTap: () {},
       ),
-      DataCell(
-        Text((materialData.amount * quantity).toString()),
-      ),
+      if (projectId != null)
+        DataCell(
+          Text((materialData.amount * quantity).toString()),
+        ),
       DataCell(
         Container(
           child: Row(
@@ -102,12 +120,13 @@ class MaterialsTable extends StatelessWidget {
                 color: Theme.of(context).errorColor,
                 onPressed: projectId == null
                     ? () {
-                        Provider.of<Materials>(context)
+                        Provider.of<Materials>(context, listen: false)
                             .deleteMaterial(materialData.id);
+                        Provider.of<Projects>(context, listen:false).deleteMaterialInAllProjects(materialId);
                       }
                     : () {
-                        Provider.of<Projects>(context)
-                            .deleteMaterialInProject(projectId, materialData.id);
+                        Provider.of<Projects>(context, listen: false).deleteMaterialInProject(
+                            projectId, materialData.id);
                       },
               ),
             ],

@@ -27,12 +27,16 @@ class Project with ChangeNotifier {
     @required this.status,
   });
 
-  Future<void> addMaterialToProject(String materialId, int quantity) async {
-    materials.putIfAbsent(materialId, () => quantity);
-  }
-
-  Future<void> updateMaterialQuantity(String materialId, int newQuantity) async {
-    materials.update(materialId, (quantity) => newQuantity);
+  Future<void> updateMaterialQuantity(
+    String materialId,
+    int newQuantity,
+  ) async {
+    if (materials.containsKey(materialId)) {
+      materials.update(materialId, (quantity) => newQuantity);
+    } else {
+      materials.putIfAbsent(materialId, () => newQuantity);
+    }
+    notifyListeners();
   }
 
   // Getting the materials with quantities

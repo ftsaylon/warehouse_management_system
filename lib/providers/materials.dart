@@ -10,16 +10,19 @@ class Materials with ChangeNotifier {
       id: 1.toString(),
       name: "Tarpaulin",
       amount: 1000,
+      stock: 100,
     ),
     MaterialItem(
       id: 2.toString(),
       name: "Vinyl",
       amount: 340,
+      stock: 100,
     ),
     MaterialItem(
       id: 3.toString(),
       name: "Ink",
       amount: 500,
+      stock: 100,
     ),
   ];
 
@@ -32,6 +35,7 @@ class Materials with ChangeNotifier {
       id: DateTime.now().toString(),
       name: materialItem.name,
       amount: materialItem.amount,
+      stock: materialItem.stock,
     );
 
     _items.add(newMaterial);
