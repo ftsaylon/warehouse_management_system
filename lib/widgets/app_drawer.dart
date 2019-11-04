@@ -16,7 +16,7 @@ class AppDrawer extends StatelessWidget {
           AppBar(
             leading: IconButton(
               icon: Icon(Icons.close),
-              onPressed: (){
+              onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
@@ -26,31 +26,46 @@ class AppDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.contacts),
+            leading: Icon(
+              Icons.contacts,
+              color: Theme.of(context).accentColor,
+            ),
             title: Text('Accounts'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(AccountsScreen.routeName);
+              Navigator.of(context)
+                  .pushReplacementNamed(AccountsScreen.routeName);
             },
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.assignment),
+            leading: Icon(
+              Icons.assignment,
+              color: Theme.of(context).accentColor,
+            ),
             title: Text('Projects'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(ProjectsScreen.routeName);
+              Navigator.of(context)
+                  .pushReplacementNamed(ProjectsScreen.routeName);
             },
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.home),
+            leading: Icon(
+              Icons.home,
+              color: Theme.of(context).accentColor,
+            ),
             title: Text('Inventory'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(InventoryScreen.routeName);
+              Navigator.of(context)
+                  .pushReplacementNamed(InventoryScreen.routeName);
             },
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.folder_open),
+            leading: Icon(
+              Icons.folder_open,
+              color: Theme.of(context).accentColor,
+            ),
             title: Text('Quotations'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
@@ -58,7 +73,10 @@ class AppDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.folder),
+            leading: Icon(
+              Icons.folder,
+              color: Theme.of(context).accentColor,
+            ),
             title: Text('Job Orders'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
@@ -66,7 +84,10 @@ class AppDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.shopping_cart),
+            leading: Icon(
+              Icons.shopping_cart,
+              color: Theme.of(context).accentColor,
+            ),
             title: Text('Purchasing'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
@@ -74,7 +95,10 @@ class AppDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.local_shipping),
+            leading: Icon(
+              Icons.local_shipping,
+              color: Theme.of(context).accentColor,
+            ),
             title: Text('Delivery'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
@@ -82,7 +106,10 @@ class AppDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.receipt),
+            leading: Icon(
+              Icons.receipt,
+              color: Theme.of(context).accentColor,
+            ),
             title: Text('Billing'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
@@ -90,7 +117,10 @@ class AppDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.payment),
+            leading: Icon(
+              Icons.payment,
+              color: Theme.of(context).accentColor,
+            ),
             title: Text('Collection'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');

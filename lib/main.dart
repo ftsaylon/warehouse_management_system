@@ -46,9 +46,16 @@ class MyApp extends StatelessWidget {
         title: 'Solar WMS',
         theme: ThemeData(
           fontFamily: 'Roboto',
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.blueGrey,
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(
+            color: Colors.blueGrey
+          ),
           textTheme: TextTheme(
-            headline: TextStyle(fontSize: 25),
+            headline: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           pageTransitionsTheme: PageTransitionsTheme(
             builders: {

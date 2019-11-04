@@ -17,7 +17,7 @@ class CardTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +26,7 @@ class CardTable extends StatelessWidget {
                 label,
                 style: Theme.of(context).textTheme.headline,
               ),
-              if(table != null) table,
+              if (table != null) table,
             ],
           ),
         ),
