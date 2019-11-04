@@ -32,9 +32,20 @@ class AccountsScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  "Accounts",
-                  style: Theme.of(context).textTheme.headline,
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.contacts,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Accounts",
+                      style: Theme.of(context).textTheme.headline,
+                    ),
+                  ],
                 ),
                 RaisedButton(
                   child: Text("Add New Account"),

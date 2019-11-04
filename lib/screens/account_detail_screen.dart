@@ -46,7 +46,7 @@ class AccountDetailScreen extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Category: ",
-                        style: Theme.of(context).textTheme.subhead,
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text("${loadedAccount.category}"),
                     ],
@@ -55,7 +55,7 @@ class AccountDetailScreen extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Industry: ",
-                        style: Theme.of(context).textTheme.subhead,
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text("${loadedAccount.industry}"),
                     ],
@@ -64,7 +64,7 @@ class AccountDetailScreen extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Address: ",
-                        style: Theme.of(context).textTheme.subhead,
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text("${loadedAccount.address}"),
                     ],

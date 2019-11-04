@@ -59,7 +59,7 @@ class ProjectDetailScreen extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             "Client: ",
-                            style: Theme.of(context).textTheme.subhead,
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             Provider.of<Accounts>(context)
@@ -72,7 +72,7 @@ class ProjectDetailScreen extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             "Amount: ",
-                            style: Theme.of(context).textTheme.subhead,
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             FlutterMoneyFormatter(
@@ -86,7 +86,7 @@ class ProjectDetailScreen extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             "Expected Revenue: ",
-                            style: Theme.of(context).textTheme.subhead,
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             FlutterMoneyFormatter(
@@ -100,7 +100,7 @@ class ProjectDetailScreen extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             "Close Date: ",
-                            style: Theme.of(context).textTheme.subhead,
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             DateFormat(

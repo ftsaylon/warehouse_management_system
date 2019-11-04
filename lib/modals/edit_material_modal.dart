@@ -9,7 +9,8 @@ import '../providers/projects.dart';
 
 class EditMaterialModal extends StatefulWidget {
   final String materialId; // materialId is null if adding
-  final String projectId; // projectId is null if this modal is accessed thru Inventory Screen
+  final String
+      projectId; // projectId is null if this modal is accessed thru Inventory Screen
 
   EditMaterialModal({
     this.materialId,
@@ -21,9 +22,9 @@ class EditMaterialModal extends StatefulWidget {
 }
 
 class _EditMaterialModalState extends State<EditMaterialModal> {
-  // quantity is separated from _editedMaterial because 
+  // quantity is separated from _editedMaterial because
   // it is used for the projects provider and not the materials provider
-  var quantity = 0; 
+  var quantity = 0;
   final _form = GlobalKey<FormState>();
   var _editedMaterial = MaterialItem(
     id: null,
@@ -73,8 +74,10 @@ class _EditMaterialModalState extends State<EditMaterialModal> {
       _isLoading = true;
     });
 
-    if (widget.projectId != null) { // Checks if accessed thru project page
-      if (_editedMaterial.id != null) { // Checks if editing
+    if (widget.projectId != null) {
+      // Checks if accessed thru project page
+      if (_editedMaterial.id != null) {
+        // Checks if editing
         await Provider.of<Projects>(context, listen: false)
             .updateMaterialInProject(
           widget.projectId,
@@ -82,8 +85,10 @@ class _EditMaterialModalState extends State<EditMaterialModal> {
           quantity,
         );
       }
-    } else { // Runs if adding a new material in Inventory page
-      if (_editedMaterial.id != null) { // Checks if editing
+    } else {
+      // Runs if adding a new material in Inventory page
+      if (_editedMaterial.id != null) {
+        // Checks if editing
         await Provider.of<Materials>(context, listen: false)
             .updateMaterial(_editedMaterial);
       } else {
@@ -137,6 +142,7 @@ class _EditMaterialModalState extends State<EditMaterialModal> {
                         children: <Widget>[
                           if (widget.projectId == null)
                             TextFormField(
+                              maxLength: 20,
                               initialValue: _initValues['name'].toString(),
                               decoration:
                                   InputDecoration(labelText: "Item Name"),

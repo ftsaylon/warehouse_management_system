@@ -33,9 +33,20 @@ class InventoryScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  "Inventory",
-                  style: Theme.of(context).textTheme.headline,
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.home,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Inventory",
+                      style: Theme.of(context).textTheme.headline,
+                    ),
+                  ],
                 ),
                 RaisedButton(
                   child: Text("Add New Material"),

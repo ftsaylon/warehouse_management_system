@@ -56,9 +56,9 @@ class MyApp extends StatelessWidget {
               fontSize: 25,
               fontWeight: FontWeight.bold,
             ),
-            subhead: TextStyle(
-              fontWeight: FontWeight.bold
-            ),
+            // body2: TextStyle(
+            //   fontWeight: FontWeight.bold
+            // ),
           ),
           pageTransitionsTheme: PageTransitionsTheme(
             builders: {

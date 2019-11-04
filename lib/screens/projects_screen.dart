@@ -32,9 +32,20 @@ class ProjectsScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  "Projects",
-                  style: Theme.of(context).textTheme.headline,
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.assignment,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Projects",
+                      style: Theme.of(context).textTheme.headline,
+                    ),
+                  ],
                 ),
                 RaisedButton(
                   child: Text("Add New Project"),
