@@ -26,6 +26,7 @@ class CardTable extends StatelessWidget {
                 label,
                 style: Theme.of(context).textTheme.headline,
               ),
+              Divider(),
               if (table != null) table,
             ],
           ),

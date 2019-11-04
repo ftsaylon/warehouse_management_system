@@ -2,6 +2,7 @@
 // Project Name: Solar Warehouse Management System
 
 import 'package:flutter/material.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:warehouse_management_system/modals/edit_material_modal.dart';
 import 'package:warehouse_management_system/providers/materials.dart';
@@ -88,7 +89,12 @@ class MaterialsTable extends StatelessWidget {
         onTap: () {},
       ),
       DataCell(
-        Text(materialData.amount.toString()),
+        Text(
+          FlutterMoneyFormatter(
+            amount: materialData.amount,
+            settings: MoneyFormatterSettings(symbol: "₱"),
+          ).output.symbolOnLeft.toString(),
+        ),
         onTap: () {},
       ),
       DataCell(
@@ -97,7 +103,12 @@ class MaterialsTable extends StatelessWidget {
       ),
       if (projectId != null)
         DataCell(
-          Text((materialData.amount * quantity).toString()),
+          Text(
+            FlutterMoneyFormatter(
+              amount: materialData.amount * quantity,
+              settings: MoneyFormatterSettings(symbol: "₱"),
+            ).output.symbolOnLeft.toString(),
+          ),
         ),
       DataCell(
         Container(
@@ -122,11 +133,13 @@ class MaterialsTable extends StatelessWidget {
                     ? () {
                         Provider.of<Materials>(context, listen: false)
                             .deleteMaterial(materialData.id);
-                        Provider.of<Projects>(context, listen:false).deleteMaterialInAllProjects(materialId);
+                        Provider.of<Projects>(context, listen: false)
+                            .deleteMaterialInAllProjects(materialId);
                       }
                     : () {
-                        Provider.of<Projects>(context, listen: false).deleteMaterialInProject(
-                            projectId, materialData.id);
+                        Provider.of<Projects>(context, listen: false)
+                            .deleteMaterialInProject(
+                                projectId, materialData.id);
                       },
               ),
             ],

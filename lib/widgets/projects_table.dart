@@ -2,14 +2,15 @@
 // Project Name: Solar Warehouse Management System
 
 import 'package:flutter/material.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:warehouse_management_system/providers/accounts.dart';
 
 import '../modals/edit_project_modal.dart';
 import '../screens/project_detail_screen.dart';
 import '../screens/account_detail_screen.dart';
 import '../providers/projects.dart';
+import '../providers/accounts.dart';
 
 class ProjectsTable extends StatelessWidget {
   final String accountId;
@@ -85,11 +86,21 @@ class ProjectsTable extends StatelessWidget {
                           : () {},
                     ),
                     DataCell(
-                      Text(project.amount.toString()),
+                      Text(
+                        FlutterMoneyFormatter(
+                          amount: project.amount,
+                          settings: MoneyFormatterSettings(symbol: "₱"),
+                        ).output.symbolOnLeft.toString(),
+                      ),
                       onTap: () {},
                     ),
                     DataCell(
-                      Text(project.expectedRevenue.toString()),
+                      Text(
+                        FlutterMoneyFormatter(
+                          amount: project.expectedRevenue,
+                          settings: MoneyFormatterSettings(symbol: "₱"),
+                        ).output.symbolOnLeft.toString(),
+                      ),
                       onTap: () {},
                     ),
                     DataCell(

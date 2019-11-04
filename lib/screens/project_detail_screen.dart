@@ -2,10 +2,13 @@
 // Project Name: Solar Warehouse Management System
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
 import '../modals/edit_material_modal.dart';
 import '../providers/projects.dart';
+import '../providers/accounts.dart';
 import '../widgets/card_table.dart';
 import '../widgets/materials_table.dart';
 
@@ -13,8 +16,7 @@ import '../widgets/materials_table.dart';
 class ProjectDetailScreen extends StatelessWidget {
   static const routeName = "/project-detail";
 
-  _showAddEditModal(
-      {BuildContext context, String projectId}) {
+  _showAddEditModal({BuildContext context, String projectId}) {
     showDialog(
       context: context,
       builder: (BuildContext context) => EditMaterialModal(
@@ -50,10 +52,63 @@ class ProjectDetailScreen extends StatelessWidget {
                         loadedProject.name,
                         style: Theme.of(context).textTheme.headline,
                       ),
-                      // Text(loadedProject.clientName),
-                      Text(loadedProject.amount.toString()),
-                      Text(loadedProject.expectedRevenue.toString()),
-                      Text(loadedProject.closeDate.toString()),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            "Client: ",
+                            style: Theme.of(context).textTheme.subhead,
+                          ),
+                          Text(
+                            Provider.of<Accounts>(context)
+                                .findById(loadedProject.accountId)
+                                .accountName,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            "Amount: ",
+                            style: Theme.of(context).textTheme.subhead,
+                          ),
+                          Text(
+                            FlutterMoneyFormatter(
+                              amount: loadedProject.amount,
+                              settings: MoneyFormatterSettings(symbol: "₱"),
+                            ).output.symbolOnLeft.toString(),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            "Expected Revenue: ",
+                            style: Theme.of(context).textTheme.subhead,
+                          ),
+                          Text(
+                            FlutterMoneyFormatter(
+                              amount: loadedProject.expectedRevenue,
+                              settings: MoneyFormatterSettings(symbol: "₱"),
+                            ).output.symbolOnLeft.toString(),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            "Close Date: ",
+                            style: Theme.of(context).textTheme.subhead,
+                          ),
+                          Text(
+                            DateFormat(
+                              'MM-dd-yyyy',
+                            ).format(loadedProject.closeDate),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                   RaisedButton(

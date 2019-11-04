@@ -39,9 +39,36 @@ class AccountDetailScreen extends StatelessWidget {
                     loadedAccount.name,
                     style: Theme.of(context).textTheme.headline,
                   ),
-                  Text("${loadedAccount.category}"),
-                  Text("${loadedAccount.address}"),
-                  Text("${loadedAccount.industry}"),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        "Category: ",
+                        style: Theme.of(context).textTheme.subhead,
+                      ),
+                      Text("${loadedAccount.category}"),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        "Industry: ",
+                        style: Theme.of(context).textTheme.subhead,
+                      ),
+                      Text("${loadedAccount.industry}"),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        "Address: ",
+                        style: Theme.of(context).textTheme.subhead,
+                      ),
+                      Text("${loadedAccount.address}"),
+                    ],
+                  ),
                 ],
               ),
             ),
