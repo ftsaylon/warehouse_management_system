@@ -58,6 +58,11 @@ class MyApp extends StatelessWidget {
             //   fontWeight: FontWeight.bold
             // ),
           ),
+          buttonTheme: ButtonThemeData(
+            buttonColor: Colors.blueGrey[100],
+            textTheme: ButtonTextTheme.primary,
+            hoverColor: Colors.blueGrey[200],
+          ),
           pageTransitionsTheme: PageTransitionsTheme(
             builders: {
               TargetPlatform.android: CustomPageTransitionBuilder(),

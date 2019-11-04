@@ -113,6 +113,7 @@ class ProjectDetailScreen extends StatelessWidget {
                   ),
                   RaisedButton(
                     child: Text("Add Material"),
+                    elevation: 0,
                     onPressed: () {
                       _showAddEditModal(context: context, projectId: projectId);
                     },

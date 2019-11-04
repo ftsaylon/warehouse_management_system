@@ -21,7 +21,7 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             elevation: 0,
-            title: Text('Dashboard'),
+            // title: Text('Dashboard'),
             automaticallyImplyLeading: false,
           ),
           Divider(),

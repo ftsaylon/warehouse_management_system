@@ -194,8 +194,6 @@ class _EditContactModalState extends State<EditContactModal> {
                               children: <Widget>[
                                 RaisedButton(
                                   child: Text("Submit"),
-                                  textColor: Colors.white,
-                                  color: Theme.of(context).accentColor,
                                   onPressed: () {
                                     _saveForm();
                                   },
