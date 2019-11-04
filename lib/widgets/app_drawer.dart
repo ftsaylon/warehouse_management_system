@@ -2,10 +2,10 @@
 // Project Name: Solar Warehouse Management System
 
 import 'package:flutter/material.dart';
-import 'package:warehouse_management_system/screens/inventory_screen.dart';
 
-import '../screens/projects_screen.dart';
 import '../screens/accounts_screen.dart';
+import '../screens/projects_screen.dart';
+import '../screens/inventory_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   @override

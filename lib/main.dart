@@ -1,7 +1,6 @@
 // Flutter Packages
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:warehouse_management_system/screens/inventory_screen.dart';
 
 // Helpers
 import './helpers/custom_route.dart';
@@ -17,9 +16,10 @@ import './screens/accounts_screen.dart';
 import './screens/account_detail_screen.dart';
 import './screens/projects_screen.dart';
 import './screens/project_detail_screen.dart';
+import './screens/inventory_screen.dart';
 
 // Widgets
-import './widgets/app_drawer.dart';
+// import './widgets/app_drawer.dart';
 
 void main() => runApp(MyApp());
 
@@ -48,9 +48,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Roboto',
           primarySwatch: Colors.blueGrey,
           scaffoldBackgroundColor: Colors.white,
-          appBarTheme: AppBarTheme(
-            color: Colors.blueGrey
-          ),
+          appBarTheme: AppBarTheme(color: Colors.blueGrey),
           textTheme: TextTheme(
             headline: TextStyle(
               fontSize: 25,
@@ -97,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         elevation: 0,
       ),
-      drawer: AppDrawer(),
+      // drawer: AppDrawer(),
       body: Center(),
     );
   }

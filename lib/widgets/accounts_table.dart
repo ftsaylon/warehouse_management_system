@@ -5,6 +5,7 @@ import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 import '../modals/edit_account_modal.dart';
 import '../screens/account_detail_screen.dart';
@@ -72,6 +73,7 @@ class AccountsTable extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
+                        // launch(account.website);
                         html.window.open(account.website, account.website);
                       },
                     ),

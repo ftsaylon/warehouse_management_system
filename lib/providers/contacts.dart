@@ -25,6 +25,34 @@ class Contacts with ChangeNotifier {
     return [..._items];
   }
 
+  Future<void> addContact(Contact contact) async {
+    final newContact = Contact(
+      id: DateTime.now().toString(),
+      name: contact.name,
+      contactNumber: contact.contactNumber,
+      accountId: contact.accountId,
+    );
+    _items.add(newContact);
+    notifyListeners();
+  }
+
+    Future<void> updateContact(Contact newContact) async {
+    final String id = newContact.id;
+    final contactIndex = _items.indexWhere((contact) => contact.id == id);
+    if (contactIndex >= 0) {
+      _items[contactIndex] = newContact;
+      notifyListeners();
+    }
+  }
+
+  // Function for deleting an account
+  void deleteContact(String id) {
+    final existingContactIndex =
+        _items.indexWhere((contact) => contact.id == id);
+    _items.removeAt(existingContactIndex);
+    notifyListeners();
+  }
+
   // Get one account using account ID
   Contact findById(String id) {
     return _items.firstWhere((account) => account.id == id);

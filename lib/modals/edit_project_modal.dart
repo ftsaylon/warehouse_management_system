@@ -9,8 +9,12 @@ import '../providers/accounts.dart';
 
 class EditProjectModal extends StatefulWidget {
   final String projectId;
+  final String accountId;
 
-  EditProjectModal({this.projectId});
+  EditProjectModal({
+    this.projectId,
+    this.accountId,
+  });
 
   @override
   _EditProjectModalState createState() => _EditProjectModalState();
@@ -54,7 +58,7 @@ class _EditProjectModalState extends State<EditProjectModal> {
             .findById(widget.projectId);
         _initValues = {
           'name': _editedProject.name,
-          'accountId': _editedProject.accountId,
+          'accountId': widget.accountId ?? _editedProject.accountId,
           'materials': _editedProject.materials,
           'quotations': _editedProject.quotations,
           'amount': _editedProject.amount,
@@ -158,7 +162,7 @@ class _EditProjectModalState extends State<EditProjectModal> {
                               _editedProject = Project(
                                 id: _editedProject.id,
                                 name: value,
-                                accountId: _editedProject.accountId,
+                                accountId: widget.accountId ?? _editedProject.accountId,
                                 materials: _editedProject.materials,
                                 quotations: _editedProject.quotations,
                                 amount: _editedProject.amount,
@@ -170,33 +174,34 @@ class _EditProjectModalState extends State<EditProjectModal> {
                           ),
                           // if (widget.projectId ==
                           //     null) // Checks if editing the project. Account can't be changed.
-                          DropdownButtonFormField(
-                            items: accountChoices,
-                            value: _editedProject.accountId,
-                            decoration: InputDecoration(labelText: "Account"),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Please provide a value.";
-                              }
-                              return null;
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                _editedProject = Project(
-                                  id: _editedProject.id,
-                                  name: _editedProject.name,
-                                  accountId: value,
-                                  materials: _editedProject.materials,
-                                  quotations: _editedProject.quotations,
-                                  amount: _editedProject.amount,
-                                  expectedRevenue:
-                                      _editedProject.expectedRevenue,
-                                  closeDate: _editedProject.closeDate,
-                                  status: _editedProject.status,
-                                );
-                              });
-                            },
-                          ),
+                          if (widget.accountId == null)
+                            DropdownButtonFormField(
+                              items: accountChoices,
+                              value: _editedProject.accountId,
+                              decoration: InputDecoration(labelText: "Account"),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Please provide a value.";
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {
+                                setState(() {
+                                  _editedProject = Project(
+                                    id: _editedProject.id,
+                                    name: _editedProject.name,
+                                    accountId: value,
+                                    materials: _editedProject.materials,
+                                    quotations: _editedProject.quotations,
+                                    amount: _editedProject.amount,
+                                    expectedRevenue:
+                                        _editedProject.expectedRevenue,
+                                    closeDate: _editedProject.closeDate,
+                                    status: _editedProject.status,
+                                  );
+                                });
+                              },
+                            ),
                           TextFormField(
                             initialValue: _initValues['amount'].toString(),
                             decoration: InputDecoration(labelText: "Amount"),
@@ -210,7 +215,7 @@ class _EditProjectModalState extends State<EditProjectModal> {
                               _editedProject = Project(
                                 id: _editedProject.id,
                                 name: _editedProject.name,
-                                accountId: _editedProject.accountId,
+                                accountId: widget.accountId ?? _editedProject.accountId,
                                 materials: _editedProject.materials,
                                 quotations: _editedProject.quotations,
                                 amount: double.parse(value),
@@ -235,7 +240,7 @@ class _EditProjectModalState extends State<EditProjectModal> {
                               _editedProject = Project(
                                 id: _editedProject.id,
                                 name: _editedProject.name,
-                                accountId: _editedProject.accountId,
+                                accountId: widget.accountId ?? _editedProject.accountId,
                                 materials: _editedProject.materials,
                                 quotations: _editedProject.quotations,
                                 amount: _editedProject.amount,
@@ -259,7 +264,7 @@ class _EditProjectModalState extends State<EditProjectModal> {
                               _editedProject = Project(
                                 id: _editedProject.id,
                                 name: _editedProject.name,
-                                accountId: _editedProject.accountId,
+                                accountId: widget.accountId ?? _editedProject.accountId,
                                 materials: _editedProject.materials,
                                 quotations: _editedProject.quotations,
                                 amount: _editedProject.amount,
@@ -282,7 +287,7 @@ class _EditProjectModalState extends State<EditProjectModal> {
                               _editedProject = Project(
                                 id: _editedProject.id,
                                 name: _editedProject.name,
-                                accountId: _editedProject.accountId,
+                                accountId: widget.accountId ?? _editedProject.accountId,
                                 materials: _editedProject.materials,
                                 quotations: _editedProject.quotations,
                                 amount: _editedProject.amount,

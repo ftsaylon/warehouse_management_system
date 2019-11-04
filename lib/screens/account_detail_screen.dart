@@ -8,10 +8,19 @@ import '../providers/accounts.dart';
 import '../widgets/contacts_table.dart';
 import '../widgets/projects_table.dart';
 import '../widgets/card_table.dart';
+import '../modals/edit_contact_modal.dart';
+import '../modals/edit_project_modal.dart';
 
 // Screen for Account Details
 class AccountDetailScreen extends StatelessWidget {
   static const routeName = "/account-detail";
+
+  _showAddEditModal(BuildContext context, Widget modal) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => modal,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,41 +41,69 @@ class AccountDetailScreen extends StatelessWidget {
           children: <Widget>[
             Container(
               // Account Details
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    loadedAccount.name,
-                    style: Theme.of(context).textTheme.headline,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Category: ",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        loadedAccount.name,
+                        style: Theme.of(context).textTheme.headline,
                       ),
-                      Text("${loadedAccount.category}"),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            "Category: ",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("${loadedAccount.category}"),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            "Industry: ",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("${loadedAccount.industry}"),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            "Address: ",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("${loadedAccount.address}"),
+                        ],
+                      ),
                     ],
                   ),
                   Row(
                     children: <Widget>[
-                      Text(
-                        "Industry: ",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      RaisedButton(
+                        child: Text("Add New Contact"),
+                        elevation: 0,
+                        onPressed: () {
+                          _showAddEditModal(
+                              context, EditContactModal(accountId: accountId));
+                        },
                       ),
-                      Text("${loadedAccount.industry}"),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        "Address: ",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      SizedBox(
+                        width: 10,
                       ),
-                      Text("${loadedAccount.address}"),
+                      RaisedButton(
+                        child: Text("Add New Project"),
+                        elevation: 0,
+                        onPressed: () {
+                          _showAddEditModal(
+                              context, EditProjectModal(accountId: accountId));
+                        },
+                      ),
                     ],
                   ),
                 ],
