@@ -25,8 +25,8 @@ class AccountsScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
-        margin: EdgeInsets.all(20),
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
             Row(

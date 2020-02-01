@@ -33,116 +33,122 @@ class ProjectsTable extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        DataTable(
-          columns: [
-            DataColumn(
-              label: Text("Project Name"),
-            ),
-            DataColumn(
-              label: Text("Client Name"),
-            ),
-            DataColumn(
-              label: Text("Amount"),
-            ),
-            DataColumn(
-              label: Text("Expected Revenue"),
-            ),
-            DataColumn(
-              label: Text("Close Date"),
-            ),
-            DataColumn(
-              label: Text("Status"),
-            ),
-            DataColumn(
-              label: Text("Actions"),
-            )
-          ],
-          rows: projectsData
-              .map(
-                (project) => DataRow(
-                  cells: [
-                    DataCell(
-                      Text(project.name),
-                      onTap: () {
-                        Navigator.of(context).pushNamed(
-                          ProjectDetailScreen.routeName,
-                          arguments: project.id,
-                        );
-                      },
-                    ),
-                    DataCell(
-                      Text(
-                        Provider.of<Accounts>(context)
-                            .findById(project.accountId)
-                            .accountName,
-                      ),
-                      onTap: accountId == null
-                          ? () {
-                              Navigator.of(context).pushNamed(
-                                AccountDetailScreen.routeName,
-                                arguments: project.accountId,
-                              );
-                            }
-                          : () {},
-                    ),
-                    DataCell(
-                      Text(
-                        FlutterMoneyFormatter(
-                          amount: project.amount,
-                          settings: MoneyFormatterSettings(symbol: "₱"),
-                        ).output.symbolOnLeft.toString(),
-                      ),
-                      onTap: () {},
-                    ),
-                    DataCell(
-                      Text(
-                        FlutterMoneyFormatter(
-                          amount: project.expectedRevenue,
-                          settings: MoneyFormatterSettings(symbol: "₱"),
-                        ).output.symbolOnLeft.toString(),
-                      ),
-                      onTap: () {},
-                    ),
-                    DataCell(
-                      Text(
-                        DateFormat(
-                          'MM-dd-yyyy',
-                        ).format(project.closeDate),
-                      ),
-                      onTap: () {},
-                    ),
-                    DataCell(
-                      Text(project.status),
-                      onTap: () {},
-                    ),
-                    DataCell(
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            IconButton(
-                              icon: Icon(Icons.edit),
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () {
-                                _showAddEditModal(context, project.id);
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(Icons.delete),
-                              color: Theme.of(context).errorColor,
-                              onPressed: () {
-                                Provider.of<Projects>(context)
-                                    .deleteProject(project.id);
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+              columns: [
+                DataColumn(
+                  label: Text("Project Name"),
                 ),
-              )
-              .toList(),
+                DataColumn(
+                  label: Text("Client Name"),
+                ),
+                DataColumn(
+                  label: Text("Amount"),
+                ),
+                DataColumn(
+                  label: Text("Expected Revenue"),
+                ),
+                DataColumn(
+                  label: Text("Close Date"),
+                ),
+                DataColumn(
+                  label: Text("Status"),
+                ),
+                DataColumn(
+                  label: Text("Actions"),
+                )
+              ],
+              rows: projectsData
+                  .map(
+                    (project) => DataRow(
+                      cells: [
+                        DataCell(
+                          Text(project.name),
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              ProjectDetailScreen.routeName,
+                              arguments: project.id,
+                            );
+                          },
+                        ),
+                        DataCell(
+                          Text(
+                            Provider.of<Accounts>(context)
+                                .findById(project.accountId)
+                                .accountName,
+                          ),
+                          onTap: accountId == null
+                              ? () {
+                                  Navigator.of(context).pushNamed(
+                                    AccountDetailScreen.routeName,
+                                    arguments: project.accountId,
+                                  );
+                                }
+                              : () {},
+                        ),
+                        DataCell(
+                          Text(
+                            FlutterMoneyFormatter(
+                              amount: project.amount,
+                              settings: MoneyFormatterSettings(symbol: "₱"),
+                            ).output.symbolOnLeft.toString(),
+                          ),
+                          onTap: () {},
+                        ),
+                        DataCell(
+                          Text(
+                            FlutterMoneyFormatter(
+                              amount: project.expectedRevenue,
+                              settings: MoneyFormatterSettings(symbol: "₱"),
+                            ).output.symbolOnLeft.toString(),
+                          ),
+                          onTap: () {},
+                        ),
+                        DataCell(
+                          Text(
+                            DateFormat(
+                              'MM-dd-yyyy',
+                            ).format(project.closeDate),
+                          ),
+                          onTap: () {},
+                        ),
+                        DataCell(
+                          Text(project.status),
+                          onTap: () {},
+                        ),
+                        DataCell(
+                          Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                IconButton(
+                                  icon: Icon(Icons.edit),
+                                  color: Theme.of(context).primaryColor,
+                                  onPressed: () {
+                                    _showAddEditModal(context, project.id);
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.delete),
+                                  color: Theme.of(context).errorColor,
+                                  onPressed: () {
+                                    Provider.of<Projects>(context)
+                                        .deleteProject(project.id);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
         ),
       ],
     );

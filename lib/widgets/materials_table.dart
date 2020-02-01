@@ -29,52 +29,58 @@ class MaterialsTable extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        DataTable(
-          columns: [
-            DataColumn(
-              label: Text("Item Name"),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+              columns: [
+                DataColumn(
+                  label: Text("Item Name"),
+                ),
+                DataColumn(
+                  label: Text("Amount"),
+                ),
+                DataColumn(
+                  label: projectId != null ? Text("Quantity") : Text("Stocks"),
+                ),
+                if (projectId != null)
+                  DataColumn(
+                    label: Text("SubTotal"),
+                  ),
+                DataColumn(
+                  label: Text("Actions"),
+                )
+              ],
+              rows: projectId != null
+                  ? Provider.of<Projects>(context)
+                      .findById(projectId)
+                      .getMaterialsByProject()
+                      .entries
+                      .map(
+                        (material) => DataRow(
+                          cells: _dataCellBuilder(
+                            context,
+                            material.key,
+                            material.value,
+                          ),
+                        ),
+                      )
+                      .toList()
+                  : Provider.of<Materials>(context)
+                      .items
+                      .map(
+                        (material) => DataRow(
+                          cells: _dataCellBuilder(
+                            context,
+                            material.id,
+                            material.stock,
+                          ),
+                        ),
+                      )
+                      .toList(),
             ),
-            DataColumn(
-              label: Text("Amount"),
-            ),
-            DataColumn(
-              label: projectId != null ? Text("Quantity") : Text("Stocks"),
-            ),
-            if (projectId != null)
-              DataColumn(
-                label: Text("SubTotal"),
-              ),
-            DataColumn(
-              label: Text("Actions"),
-            )
-          ],
-          rows: projectId != null
-              ? Provider.of<Projects>(context)
-                  .findById(projectId)
-                  .getMaterialsByProject()
-                  .entries
-                  .map(
-                    (material) => DataRow(
-                      cells: _dataCellBuilder(
-                        context,
-                        material.key,
-                        material.value,
-                      ),
-                    ),
-                  )
-                  .toList()
-              : Provider.of<Materials>(context)
-                  .items
-                  .map(
-                    (material) => DataRow(
-                      cells: _dataCellBuilder(
-                        context,
-                        material.id,
-                        material.stock,
-                      ),
-                    ),
-                  )
-                  .toList(),
+          ),
         ),
       ],
     );
